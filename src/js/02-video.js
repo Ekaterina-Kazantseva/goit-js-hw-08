@@ -13,8 +13,10 @@ const onPlay = function (data) {
   
 };
 
-player.setCurrentTime(localStorage.getItem(VIDEOPLAYER_TIME));
-
+const savedTime = localStorage.getItem(VIDEOPLAYER_TIME);
+if (savedTime) {
+  player.setCurrentTime(savedTime);
+}
 
 player.on('timeupdate', throttle(onPlay, 1000));
 
