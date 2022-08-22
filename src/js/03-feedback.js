@@ -11,26 +11,29 @@ refs.input.addEventListener('input', throttle(onInput, 500));
 refs.textarea.addEventListener('input', throttle(onInput, 500));
 
 const KEY = 'feedback-form-state';
+let data = {}
 
 addSavedData();
 
- const data = {
+function onFormSubmit(event) {
+  event.preventDefault();
+
+  console.log(data);
+
+  event.target.reset();
+  localStorage.removeItem(KEY);
+  
+}
+function onInput() {
+  data = {
     email: refs.input.value,
     message: refs.textarea.value,
   };
 
-function onFormSubmit(event) {
-  event.preventDefault();
-   
-  event.target.reset();
-  localStorage.removeItem(KEY);
-  console.log(data);
-}
-function onInput() {
-
   localStorage.setItem(KEY, JSON.stringify(data));
   
 }
+
 function addSavedData() {
   const parseText = JSON.parse(localStorage.getItem(KEY));
   console.log(parseText);
