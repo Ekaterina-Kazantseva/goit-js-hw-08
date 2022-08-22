@@ -14,21 +14,22 @@ const KEY = 'feedback-form-state';
 
 addSavedData();
 
+ const data = {
+    email: refs.input.value,
+    message: refs.textarea.value,
+  };
+
 function onFormSubmit(event) {
   event.preventDefault();
    
   event.target.reset();
   localStorage.removeItem(KEY);
+  console.log(data);
 }
 function onInput() {
-  const data = {
-    email: refs.input.value,
-    message: refs.textarea.value,
-  };
 
   localStorage.setItem(KEY, JSON.stringify(data));
-  console.log(data);
-
+  
 }
 function addSavedData() {
   const parseText = JSON.parse(localStorage.getItem(KEY));
